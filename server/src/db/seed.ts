@@ -11,11 +11,15 @@ await seed(db, schema).refine(f => {
             columns: {
                 name: f.companyName(),
                 description: f.loremIpsum(),
-            }
+            },
+            with: {
+                questions: 5,
+
+            },
         }
     }
 })
 await sql.end()
 
-console.log('Database seeded successfully') 
+console.log('Database seeded successfully')
 
