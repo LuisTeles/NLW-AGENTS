@@ -15,6 +15,13 @@
       "when": 1752019913684,
       "tag": "0001_broken_thor",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752158955641,
+      "tag": "0002_amused_callisto",
+      "breakpoints": true
     }
   ]
 }
