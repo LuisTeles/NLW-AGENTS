@@ -1,14 +1,17 @@
 import { QuestionForm } from '@/components/question-form'
-import { QuestionItem } from '@/components/question-item'
+import { QuestionList } from '@/components/question-list'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Radio } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 
-export function Room() {
-    const params = useParams()
-    const roomId = params.roomId
+type RoomParams = {
+    roomId: string
+}
 
-    if (!roomId) {
+export function Room() {
+    const params = useParams<RoomParams>()
+
+    if (!params.roomId) {
         return <Navigate replace to="/" />
     }
 
@@ -23,7 +26,7 @@ export function Room() {
                                 Voltar ao Início
                             </Button>
                         </Link>
-                        <Link to={`/room/${roomId}/audio`}>
+                        <Link to={`/room/${params.roomId}/audio`}>
                             <Button className="flex items-center gap-2" variant="secondary">
                                 <Radio className="size-4" />
                                 Gravar Áudio
@@ -39,24 +42,10 @@ export function Room() {
                 </div>
 
                 <div className="mb-8">
-                    <QuestionForm roomId={roomId} />
+                    <QuestionForm roomId={params.roomId} />
                 </div>
 
-                <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                        <h2 className="font-semibold text-2xl text-foreground">
-                            Perguntas & Respostas
-                        </h2>
-                    </div>
-
-                    <QuestionItem
-                        question={{
-                            id: '1',
-                            question: 'Pergunta 1',
-                            createdAt: new Date().toISOString(),
-                        }}
-                    />
-                </div>
+                <QuestionList roomId={params.roomId} />
             </div>
         </div>
     )
