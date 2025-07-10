@@ -1,173 +1,142 @@
 # nlw-agents
 
-**nlw-agents** is a full-stack project developed during Rocketseat's NLW (Next Level Week) event. It demonstrates modern web development practices using TypeScript, React, Fastify, PostgreSQL, and a robust toolchain for building scalable applications. The project allows users to create and view rooms, serving as a foundation for real-time or collaborative features.
+nlw-agents is a full-stack project developed during Rocketseat's Next Level Week (NLW) event. It enables users to create rooms, record audio, transcribe speech, and ask questions powered by AI, using a modern web interface and a robust backend.
+
+## Project Structure
+
+- **server/**: Fastify-based Node.js backend with PostgreSQL and AI integration
+- **web/**: React + Vite frontend with Tailwind CSS
 
 ---
 
-## 🚀 Project Purpose
-
-The goal of **nlw-agents** is to provide a practical example of a modern web application, showcasing best practices in backend and frontend development, database integration, and developer experience. It is ideal for learning, experimentation, and as a starting point for more complex projects.
-
----
-
-## 🛠️ Tech Stack & Tools
-
-### Backend (`/server`)
-
-- **TypeScript**: Strongly typed JavaScript for safer, scalable code.
-- **Fastify**: High-performance Node.js web framework for building APIs.
-- **Zod**: Type-safe schema validation for environment variables and API payloads.
-- **Drizzle ORM**: Type-safe ORM for PostgreSQL, handling schema and migrations.
-- **PostgreSQL**: Relational database for persistent data storage.
-- **drizzle-seed**: Tool for seeding the database with sample data.
-- **Docker**: Containerization for easy database setup and consistent environments.
-- **@fastify/cors**: Middleware for enabling CORS in Fastify APIs.
-- **biome**: Code formatting and linting.
-
-### Frontend (`/web`)
-
-- **React**: UI library for building interactive user interfaces.
-- **React Router DOM**: Declarative routing for React applications.
-- **@tanstack/react-query**: Data fetching and caching for React.
-- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
-- **shadcn/ui**: Prebuilt, accessible UI components.
-- **Vite**: Fast build tool and development server.
-- **clsx, tailwind-merge, class-variance-authority**: Utilities for managing CSS class names.
-- **Lucide**: Icon library for modern SVG icons.
-- **biome**: Code formatting and linting.
-
----
-
-## ⚙️ Setup Instructions
+## Getting Started
 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18+ recommended)
-- [Docker](https://www.docker.com/) (for database)
-- [npm](https://www.npmjs.com/) (comes with Node.js)
+- [pnpm](https://pnpm.io/) or [npm](https://www.npmjs.com/)
+- [Docker](https://www.docker.com/) (for local PostgreSQL)
 
 ---
 
-### 1. Clone the Repository
+### Backend Setup (server)
 
-```sh
-git clone https://github.com/your-username/nlw-agents.git
-cd nlw-agents
-```
-
----
-
-### 2. Backend Setup (`/server`)
-
-1. **Install dependencies:**
-
-    ```sh
-    cd server
-    npm install
-    ```
-
-2. **Start PostgreSQL with Docker:**
-
-    ```sh
-    docker compose up -d
-    ```
-
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/nlw-agents.git
+   cd nlw-agents/server
+   ```
+2. **Install dependencies:**
+   ```sh
+   pnpm install
+   # or
+   npm install
+   ```
 3. **Configure environment variables:**
-
-    ```sh
-    cp .env.example .env
-    # Edit .env as needed
-    ```
-
-4. **Run database migrations & (optionally) seed:**
-
-    ```sh
-    npm run db:migrate
-    npm run db:seed # optional
-    ```
-
-5. **Start the development server:**
-
-    ```sh
-    npm run dev
-    ```
-
-    The backend will be available at [http://localhost:3333](http://localhost:3333).
+   - Copy `.env.example` to `.env` and update values as needed.
+4. **Start PostgreSQL with Docker:**
+   ```sh
+   docker compose up -d
+   ```
+5. **Run database migrations and seed:**
+   ```sh
+   pnpm db:migrate && pnpm db:seed
+   # or
+   npm run db:migrate && npm run db:seed
+   ```
+6. **Start the backend server:**
+   ```sh
+   pnpm dev
+   # or
+   npm run dev
+   ```
 
 ---
 
-### 3. Frontend Setup (`/web`)
+### Frontend Setup (web)
 
 1. **Install dependencies:**
-
-    ```sh
-    cd ../web
-    npm install
-    ```
-
+   ```sh
+   cd ../web
+   pnpm install
+   # or
+   npm install
+   ```
 2. **Start the development server:**
-
-    ```sh
-    npm run dev
-    ```
-
-    The frontend will be available at [http://localhost:5173](http://localhost:5173).
+   ```sh
+   pnpm dev
+   # or
+   npm run dev
+   ```
+3. **Access the app:**
+   - Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 🏗️ Production Build
+## Production
+
+1. **Build frontend:**
+   ```sh
+   pnpm build
+   # or
+   npm run build
+   ```
+2. **Start backend in production mode:**
+   ```sh
+   pnpm start
+   # or
+   npm start
+   ```
+
+---
+
+## Main Libraries, Frameworks & Tools
 
 ### Backend
-
-```sh
-cd server
-npm run build
-npm start
-```
+- **Fastify**: Web server framework for Node.js
+- **drizzle-orm**: Type-safe ORM for PostgreSQL
+- **drizzle-kit**: Migration and schema tool for Drizzle ORM
+- **@google/genai**: Google Gemini AI API integration
+- **Zod**: TypeScript-first schema validation
+- **Docker**: Containerized PostgreSQL with pgvector
+- **TypeScript**: Type safety for Node.js
+- **Biome**: Code formatting and linting
 
 ### Frontend
-
-```sh
-cd web
-npm run build
-npm run preview
-```
-
----
-
-## 💻 Usage
-
-- Access [http://localhost:5173](http://localhost:5173) in your browser.
-- The homepage lists available rooms (fetched from the backend).
-- Click a room to view its details.
+- **React**: UI library
+- **Vite**: Fast build tool and dev server
+- **Tailwind CSS**: Utility-first CSS framework
+- **React Hook Form**: Form state management
+- **@tanstack/react-query**: Data fetching and caching
+- **Zod**: Schema validation
+- **Radix UI**: Accessible UI primitives
+- **Lucide**: Icon library
+- **Day.js**: Date handling
 
 ---
 
-## 📜 Useful Scripts
+## Usage
 
-### Backend (`/server`)
-
-- `npm run dev` — Start Fastify server in development mode
-- `npm run db:seed` — Seed the database with sample data
-
-### Frontend (`/web`)
-
-- `npm run dev` — Start Vite development server
-- `npm run build` — Build for production
-- `npm run preview` — Preview the production build
+- **Create a room**: Fill the form on the homepage
+- **Record audio**: Enter a room and use the "Gravar Áudio" button
+- **Ask questions**: Submit questions in a room to get AI-powered answers
 
 ---
 
-## 🤝 Contributing
+## Scripts & Commands
 
-Feel free to fork this repository and use it as a starting point for your own projects!
+### Backend
+- `pnpm dev` / `npm run dev` — Start backend in development mode
+- `pnpm start` / `npm start` — Start backend in production mode
+- `pnpm db:migrate` / `npm run db:migrate` — Run database migrations
+- `pnpm db:seed` / `npm run db:seed` — Seed the database
+
+### Frontend
+- `pnpm dev` / `npm run dev` — Start frontend in development mode
+- `pnpm build` / `npm run build` — Build frontend for production
 
 ---
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License.
-
-
-1:10:45
-
+This project is for educational purposes, developed during Rocketseat NLW.
